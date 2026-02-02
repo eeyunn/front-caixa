@@ -1,0 +1,77 @@
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.topBar {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.title {
+  font-size: 3rem;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: #718096;
+  font-size: 1.2rem;
+}
+
+.backBtn {
+  text-decoration: none;
+  color: #4a5568;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.backBtn:hover {
+  text-decoration: underline;
+  color: #00b5cc;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  max-width: 400px;
+  margin: 2rem auto;
+}
+
+.emptyIcon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.browseBtn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 10px 20px;
+  background-color: #00b5cc;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+
+.browseBtn:hover {
+  opacity: 0.9;
+}

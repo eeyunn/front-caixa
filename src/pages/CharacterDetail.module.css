@@ -1,0 +1,159 @@
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.backBtn {
+  background: none;
+  border: none;
+  color: #4a5568;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 2rem;
+  padding: 0;
+}
+
+.backBtn:hover {
+  text-decoration: underline;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  overflow: hidden;
+  margin-bottom: 3rem;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .header {
+    flex-direction: row;
+  }
+}
+
+.imageWrapper {
+  flex-shrink: 0;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  max-width: 400px;
+  object-fit: cover;
+  display: block;
+}
+
+.info {
+  padding: 2rem;
+  width: 100%;
+}
+
+.titleRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.name {
+  margin: 0;
+  font-size: 2.5rem;
+  color: #2d3748;
+}
+
+.favBtn {
+    padding: 8px 16px;
+    border: 1px solid #e2e8f0;
+    background: white;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+.favBtn:hover {
+    background: #f7fafc;
+    border-color: #cbd5e0;
+}
+
+.gridInfo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.infoItem {
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #718096;
+    margin-bottom: 0.25rem;
+}
+
+.status {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    width: fit-content;
+}
+
+.alive { background: #d1fae5; color: #065f46; }
+.dead { background: #fee2e2; color: #991b1b; }
+.unknown { background: #edf2f7; color: #4a5568; }
+
+.residentsSection {
+    margin-top: 2rem;
+}
+
+.residentsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.residentCard {
+    text-decoration: none;
+    color: inherit;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.residentCard:hover {
+    transform: scale(1.05);
+}
+
+.residentImage {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.residentName {
+    font-size: 0.9rem;
+    color: #4a5568;
+    display: block;
+}
+
+.loading, .error {
+    text-align: center;
+    padding: 4rem;
+    font-size: 1.5rem;
+    color: #4a5568;
+}

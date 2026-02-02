@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+  align-items: center;
+}
+
+.group {
+  flex: 1;
+  min-width: 200px;
+}
+
+.input, .select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+ box-sizing: border-box; /* Important so padding doesn't affect width */
+}
+
+.input:focus, .select:focus {
+  border-color: #00b5cc;
+  box-shadow: 0 0 0 3px rgba(0, 181, 204, 0.1);
+}
