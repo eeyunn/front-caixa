@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getCharacters } from '../api/rickAndMorty';
+import { useDebounce } from './useDebounce';
 
 export const useCharacters = (initialFilters = {}) => {
   const [characters, setCharacters] = useState([]);
@@ -9,6 +10,8 @@ export const useCharacters = (initialFilters = {}) => {
   const [filters, setFilters] = useState(initialFilters);
   const [page, setPage] = useState(1);
 
+  const debouncedFilters = useDebounce(filters, 300);
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -16,7 +19,7 @@ export const useCharacters = (initialFilters = {}) => {
       try {
         // Only include filters that have values
         const activeFilters = Object.fromEntries(
-          Object.entries(filters).filter((entry) => entry[1])
+          Object.entries(debouncedFilters).filter((entry) => entry[1])
         );
         
         const data = await getCharacters(page, activeFilters);
@@ -31,13 +34,8 @@ export const useCharacters = (initialFilters = {}) => {
       }
     };
 
-    const timeoutId = setTimeout(() => {
-        fetchData(); 
-    }, 300); // Simple debounce
-
-    return () => clearTimeout(timeoutId);
-
-  }, [filters, page]);
+    fetchData(); 
+  }, [debouncedFilters, page]);
 
   const updateFilter = (key, value) => {
     setFilters(prev => ({ ...prev, [key]: value }));
