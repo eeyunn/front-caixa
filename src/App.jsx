@@ -2,31 +2,39 @@ import { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import { FavoritesProvider } from './context/FavoritesContext';
+import ErrorBoundary from './components/ErrorBoundary';
 
-// Lazy load pages for better performance
 const Home = lazy(() => import('./pages/Home'));
 const CharacterDetail = lazy(() => import('./pages/CharacterDetail'));
 const Favorites = lazy(() => import('./pages/Favorites'));
 
+const loaderStyles = {
+  padding: '2rem',
+  textAlign: 'center',
+  color: '#718096'
+};
+
 const LoadingFallback = () => (
-  <div style={{ padding: '2rem', textAlign: 'center', color: '#718096' }}>
+  <div style={loaderStyles}>
     Cargando portal...
   </div>
 );
 
 function App() {
   return (
-    <FavoritesProvider>
-      <Suspense fallback={<LoadingFallback />}>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="favorites" element={<Favorites />} />
-            <Route path="character/:id" element={<CharacterDetail />} />
-          </Route>
-        </Routes>
-      </Suspense>
-    </FavoritesProvider>
+    <ErrorBoundary>
+      <FavoritesProvider>
+        <Suspense fallback={<LoadingFallback />}>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="favorites" element={<Favorites />} />
+              <Route path="character/:id" element={<CharacterDetail />} />
+            </Route>
+          </Routes>
+        </Suspense>
+      </FavoritesProvider>
+    </ErrorBoundary>
   );
 }
 
