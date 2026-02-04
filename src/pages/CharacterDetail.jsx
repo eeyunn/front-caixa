@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 import { getCharacterById } from '../api/rickAndMorty';
 import { useFavorites } from '../context/FavoritesContext';
 import ResidentsList from '../components/ResidentsList';
-import { translateStatus, translateGender, translateSpecies, translateType } from '../utils/translations';
+import { FAVORITE_LABELS } from '../utils/constants';
 import styles from './CharacterDetail.module.css';
 
 const CharacterDetail = () => {
@@ -78,8 +78,8 @@ const CharacterDetail = () => {
                     <Motion.button 
                         onClick={handleToggleFavorite}
                         className={styles.favBtn}
-                        title={favorite ? "Eliminar de favoritos" : "Añadir a favoritos"}
-                        aria-label={favorite ? "Eliminar de favoritos" : "Añadir a favoritos"}
+                        title={favorite ? FAVORITE_LABELS.REMOVE : FAVORITE_LABELS.ADD}
+                        aria-label={favorite ? FAVORITE_LABELS.REMOVE : FAVORITE_LABELS.ADD}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                     >
@@ -91,17 +91,17 @@ const CharacterDetail = () => {
                     <div className={styles.infoItem}>
                         <span className={styles.label}>Estado:</span>
                         <span className={`${styles.status} ${styles[character.status.toLowerCase()]}`}>
-                            {translateStatus(character.status)}
+                            {character.status}
                         </span>
                     </div>
                      <div className={styles.infoItem}>
-                        <span className={styles.label}>Especie:</span> {translateSpecies(character.species)}
+                        <span className={styles.label}>Especie:</span> {character.species}
                     </div>
                      <div className={styles.infoItem}>
-                        <span className={styles.label}>Tipo:</span> {translateType(character.type)}
+                        <span className={styles.label}>Tipo:</span> {character.type || 'Unknown'}
                     </div>
                      <div className={styles.infoItem}>
-                        <span className={styles.label}>Género:</span> {translateGender(character.gender)}
+                        <span className={styles.label}>Género:</span> {character.gender}
                     </div>
                      <div className={styles.infoItem}>
                         <span className={styles.label}>Origen:</span> {character.origin.name}
