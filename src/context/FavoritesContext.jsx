@@ -1,20 +1,15 @@
-import { createContext, useState, useContext, useEffect } from 'react';
+import { createContext, useContext } from 'react';
 import PropTypes from 'prop-types';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
 
 const FavoritesContext = createContext();
 
 export const FavoritesProvider = ({ children }) => {
-  const [favorites, setFavorites] = useState(() => {
-    const saved = localStorage.getItem('favorites');
-    return saved ? JSON.parse(saved) : [];
-  });
-
-  useEffect(() => {
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-  }, [favorites]);
+  const [favorites, setFavorites] = useLocalStorage('favorites', []);
 
   const addFavorite = (character) => {
     setFavorites((prev) => {
+      // Prevents adding if already exists (extra safety)
       if (prev.find((fav) => fav.id === character.id)) return prev;
       return [...prev, character];
     });
