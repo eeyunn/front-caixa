@@ -1,4 +1,4 @@
-# Rick and Morty - Hub Interdimensional 🌌
+# Rick and Morty 🌌
 
 Bienvenido al explorador definitivo del multiverso, desarrollado como prueba técnica moderna para demostrar prácticas avanzadas en el ecosistema React.
 
