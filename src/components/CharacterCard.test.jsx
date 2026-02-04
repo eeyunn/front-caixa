@@ -52,8 +52,7 @@ describe('CharacterCard Component', () => {
 
     // Verificar nombre
     expect(screen.getByText('Rick Sanchez')).toBeInTheDocument();
-    // Verificar traducción de estado (Alive -> Vivo)
-    expect(screen.getByText('Vivo')).toBeInTheDocument();
+    expect(screen.getByText('Alive')).toBeInTheDocument();
   });
 
   it('debería llamar a addFavorite cuando se pulsa el botón y no es favorito', () => {

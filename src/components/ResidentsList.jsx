@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getLocationByUrl, getMultipleCharacters } from '../api/rickAndMorty';
-import styles from '../pages/CharacterDetail.module.css'; // Reusing styles to keep it consistent
+import styles from './ResidentsList.module.css';
 
 const ResidentsList = ({ locationUrl, currentCharacterId }) => {
   const [residents, setResidents] = useState([]);
@@ -43,7 +43,7 @@ const ResidentsList = ({ locationUrl, currentCharacterId }) => {
 
       } catch (err) {
         console.error("Error fetching residents", err);
-        setError("Could not load residents.");
+        setError("Error al cargar los residentes.");
       } finally {
         setLoading(false);
       }
@@ -58,11 +58,11 @@ const ResidentsList = ({ locationUrl, currentCharacterId }) => {
 
   return (
     <div className={styles.residentsSection}>
-        <h3>Vecinos</h3>
+        <h3 className={styles.sectionTitle}>Vecinos</h3>
         {residents.length === 0 ? (
             <p className={styles.noResidents}>No se encontraron otros vecinos aquí.</p>
         ) : (
-            <div className={styles.residentsGrid}>
+            <div className={styles.grid}>
                 {residents.map(res => (
                     <Link key={res.id} to={`/character/${res.id}`} className={styles.residentCard}>
                         <img src={res.image} alt={res.name} className={styles.residentImage} loading="lazy" />
