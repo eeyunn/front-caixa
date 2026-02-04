@@ -3,7 +3,6 @@
 Aplicación de exploración de personajes utilizando la API de Rick and Morty, desarrollada con React moderno, optimizada para rendimiento y completamente localizada al español.
 
 ![Unit Tests](https://img.shields.io/badge/tests-passing-brightgreen)
-![E2E Tests](https://img.shields.io/badge/cypress-passing-success)
 ![React](https://img.shields.io/badge/react-v19.0.0-blue)
 ![Vite](https://img.shields.io/badge/vite-v6.0.0-purple)
 
@@ -13,17 +12,17 @@ Esta aplicación va más allá de un simple consumo de API, implementando patron
 
 - **Arquitectura Modular y SOLID**: Separación clara de responsabilidades (Servicios, Contexto, Hooks, UI).
 - **Gestión de Estado**: Uso de `Context API` para funcionalidades globales como "Favoritos" con persistencia en LocalStorage.
+- **Búsqueda Avanzada**: Filtrado cruzado que permite buscar personajes por **Localización** (resolviendo limitaciones de la API REST original), además de Nombre y Especie.
 - **Optimización de Rendimiento**:
-  - `Lazy Loading` en rutas para reducir el bundle inicial.
-  - Carga diferida de imágenes.
+  - **Smart Caching Layer**: Caché en memoria personalizada y sistema de reintentos automáticos para mitigar el *Rate Limiting* de la API pública.
+  - **Optimizaciones CSS**: Animaciones nativas en listas extensas para evitar overhead de JS (reemplazando librerías pesadas en renderizados masivos).
+  - `Lazy Loading` en imágenes con estrategia de *backoff* para reintentos y *fallbacks* visuales robustos.
 - **Experiencia de Usuario (UX)**:
-  - **Localización Completa (i18n)**: Traducción no solo de la UI, sino de los **datos de la API** (Status: *Alive* -> *Vivo*).
+  - **Propagación de Estado (Deep Linking)**: Sincronización bidireccional URL-Estado perfecta. Permite compartir búsquedas complejas y mantiene la navegación coherente al usar los botones de "Atrás/Adelante" del navegador.
   - **Feedback Visual**: Skeletons durante la carga y notificaciones (Toasts) para acciones del usuario.
-  - **Animaciones**: Micro-interacciones fluidas utilizando `Framer Motion`.
   - **Manejo de Errores**: `Error Boundary` global para prevenir pantallas blancas en fallos críticos.
 - **Calidad de Código**: 
   - Tests **Unitarios** y de **Integración** con Vitest y React Testing Library.
-  - Tests **End-to-End (E2E)** con Cypress para validar flujos críticos de usuario.
 
 ## 🛠️ Stack Tecnológico
 
@@ -35,7 +34,6 @@ Esta aplicación va más allá de un simple consumo de API, implementando patron
 - **Testing**: 
   - **Unit**: Vitest, JSDOM, React Testing Library.
   - **E2E**: Cypress, Start-Server-And-Test.
-
 ## 📂 Estructura del Proyecto
 
 ```bash
@@ -68,9 +66,6 @@ src/
    # Unitarios e Integración
    npm run test
 
-   # End-to-End (Cypress)
-   npm run test:e2e
-   ```
 
 4. **Construir para Producción:**
    ```bash
@@ -80,5 +75,5 @@ src/
 ## ✅ Decisiones de Diseño
 
 - **¿Por qué CSS Modules?**: Para demostrar dominio de CSS nativo y evitar el peso extra de librerías de componentes (MUI/Bootstrap) que a menudo dificultan la personalización, manteniendo los estilos encapsulados.
-- **¿Por qué Context vs Redux?**: Para el alcance de esta aplicación (gestionar favoritos), Context API junto con `useReducer` o estados simples es suficiente y evita la complejidad innecesaria de Redux.
-- **Traducción de Datos**: Se implementó una capa de utilidad (`translations.js`) para mapear los valores en inglés de la API a español, mejorando la experiencia del usuario final hispanohablante.
+- **¿Por qué Context vs Redux?**: Para el alcance de esta aplicación (gestionar favoritos), Context API junto con `useState` es suficiente y evita la complejidad innecesaria de Redux.
+
