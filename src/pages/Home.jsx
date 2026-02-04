@@ -1,13 +1,13 @@
-import { useCharacters } from '../hooks/useCharacters';
-import CharacterCard from '../components/CharacterCard';
-import FilterBar from '../components/FilterBar';
-import SkeletonCard from '../components/SkeletonCard';
+import { useCharacters } from '@/hooks/useCharacters';
+import CharacterCard from '@/components/CharacterCard';
+import FilterBar from '@/components/FilterBar';
+import SkeletonCard from '@/components/SkeletonCard';
 import styles from './Home.module.css';
 
 const Home = () => {
   const { 
     characters, 
-    loading, 
+    isLoading: loading, 
     error, 
     page, 
     setPage, 
@@ -18,7 +18,6 @@ const Home = () => {
 
   return (
     <div className={styles.container}>
-      {/* Search Header */}
       <section className={styles.intro}>
         <h1 className={styles.title}>El Hub de Rick y Morty</h1>
         <FilterBar filters={filters} onFilterChange={updateFilter} />
