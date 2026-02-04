@@ -7,6 +7,19 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  opacity: 0;
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .card:hover {
@@ -26,12 +39,21 @@
   width: 100%;
   aspect-ratio: 1;
   overflow: hidden;
+  position: relative;
+  background-color: #f7fafc; /* Color de fondo ligero mientras carga */
 }
 
 .image {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.imageLoaded {
+  opacity: 1;
 }
 
 .content {
@@ -59,6 +81,15 @@
   cursor: pointer;
   font-size: 1.2rem;
   padding: 0 4px;
+  transition: transform 0.2s;
+}
+
+.favBtn:hover {
+  transform: scale(1.2);
+}
+
+.favBtn:active {
+  transform: scale(0.8);
 }
 
 .text {
@@ -76,4 +107,37 @@
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: #a0aec0;
+}
+
+.imageFallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #cbd5e0;
+  color: #718096;
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.skeletonLoader {
+  width: 100%;
+  height: 100%;
+  background: #edf2f7;
+  animation: pulse 1.5s infinite;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
 }

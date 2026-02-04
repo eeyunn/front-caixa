@@ -4,11 +4,9 @@ import { FavoritesProvider, useFavorites } from './FavoritesContext';
 
 describe('FavoritesContext', () => {
   beforeEach(() => {
-    // Limpiamos localStorage antes de cada test para asegurar aislamiento
     localStorage.clear();
   });
 
-  // Wrapper necesario para proveer el contexto a nuestros hooks durante el test
   const wrapper = ({ children }) => <FavoritesProvider>{children}</FavoritesProvider>;
 
   it('debe iniciar con lista de favoritos vacía si no hay nada en localStorage', () => {
@@ -35,7 +33,7 @@ describe('FavoritesContext', () => {
 
     act(() => {
       result.current.addFavorite(character);
-      result.current.addFavorite(character); // Intentamos añadir de nuevo
+      result.current.addFavorite(character);
     });
 
     expect(result.current.favorites).toHaveLength(1);
@@ -46,7 +44,6 @@ describe('FavoritesContext', () => {
     const char1 = { id: 1, name: 'Rick' };
     const char2 = { id: 2, name: 'Morty' };
 
-    // Añadimos dos
     act(() => {
       result.current.addFavorite(char1);
       result.current.addFavorite(char2);
@@ -54,7 +51,6 @@ describe('FavoritesContext', () => {
 
     expect(result.current.favorites).toHaveLength(2);
 
-    // Eliminamos uno
     act(() => {
       result.current.removeFavorite(1);
     });
@@ -82,7 +78,6 @@ describe('FavoritesContext', () => {
       result.current.addFavorite(char);
     });
 
-    // Verificamos directamente el localStorage del "navegador" (jsdom)
     const stored = JSON.parse(localStorage.getItem('favorites'));
     expect(stored).toHaveLength(1);
     expect(stored[0].name).toBe('Beth');

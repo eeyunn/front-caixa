@@ -2,9 +2,8 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, vi, expect, beforeEach } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 import CharacterCard from './CharacterCard';
-import * as FavoritesContext from '../context/FavoritesContext';
+import * as FavoritesContext from '@/context/FavoritesContext';
 
-// Mock simple de react-hot-toast
 vi.mock('react-hot-toast', () => ({
   default: {
     success: vi.fn(),
@@ -12,7 +11,6 @@ vi.mock('react-hot-toast', () => ({
   }
 }));
 
-// Mock del contexto
 const mockAddFavorite = vi.fn();
 const mockRemoveFavorite = vi.fn();
 const mockIsFavorite = vi.fn();
@@ -41,7 +39,6 @@ describe('CharacterCard Component', () => {
     });
 
   it('debería renderizar la información del personaje correctamente', () => {
-    // Simulamos que NO es favorito
     mockIsFavorite.mockReturnValue(false);
 
     render(
@@ -50,7 +47,6 @@ describe('CharacterCard Component', () => {
       </MemoryRouter>
     );
 
-    // Verificar nombre
     expect(screen.getByText('Rick Sanchez')).toBeInTheDocument();
     expect(screen.getByText('Alive')).toBeInTheDocument();
   });
