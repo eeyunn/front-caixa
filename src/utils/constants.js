@@ -1,15 +1,25 @@
-// Constantes globales de la aplicación
-
 export const FAVORITE_LABELS = {
   ADD: "Añadir a favoritos",
   REMOVE: "Eliminar de favoritos"
 };
 
+export const API_CONFIG = {
+  ITEMS_PER_PAGE: 20,
+  MAX_FETCH_LIMIT: 250
+};
+
 export const ANIMATIONS = {
   card: {
-    initial: { opacity: 0, y: 30 },
-    animate: { opacity: 1, y: 0 },
-    hover: { y: -8, transition: { duration: 0.2 } }
+    hidden: { opacity: 0, y: 30 },
+    visible: (index) => ({
+      opacity: 1,
+      y: 0,
+      transition: { 
+        duration: 0.5, 
+        ease: "easeOut", 
+        delay: index * 0.1 
+      }
+    })
   },
   image: {
     hover: { scale: 1.05 },
