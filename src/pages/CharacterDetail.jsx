@@ -1,40 +1,36 @@
-import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { motion as Motion } from 'framer-motion';
 import toast from 'react-hot-toast';
-import { getCharacterById } from '../api/rickAndMorty';
-import { useFavorites } from '../context/FavoritesContext';
-import ResidentsList from '../components/ResidentsList';
-import { FAVORITE_LABELS } from '../utils/constants';
+import { getCharacterById } from '@/api/rickAndMorty';
+import { useFavorites } from '@/context/FavoritesContext';
+import ResidentsList from '@/components/ResidentsList';
+import { FAVORITE_LABELS } from '@/utils/constants';
 import styles from './CharacterDetail.module.css';
 
 const CharacterDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [character, setCharacter] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const location = useLocation();
   const { isFavorite, addFavorite, removeFavorite } = useFavorites();
 
-  useEffect(() => {
-    const fetchFullDetails = async () => {
-      try {
-        setLoading(true);
-        // 1. Fetch Character
-        const charData = await getCharacterById(id);
-        setCharacter(charData);
-      } catch (error) {
-        console.error("Failed to load details", error);
-        toast.error("Error al cargar los detalles del personaje");
-      } finally {
-        setLoading(false);
-      }
-    };
+  const { data: character, isLoading: loading, isError } = useQuery({
+    queryKey: ['character', id],
+    queryFn: () => getCharacterById(id),
+    staleTime: 1000 * 60 * 30, // 30 mins cache for details
+    retry: false // If it fails (e.g. 404), don't retry endlessly
+  });
 
-    fetchFullDetails();
-  }, [id]);
+  const handleBack = () => {
+      if (location.state?.search) {
+          navigate(`/${location.state.search}`);
+      } else {
+          navigate('/');
+      }
+  };
 
   if (loading) return <div className={styles.loading}>Cargando detalles...</div>;
-  if (!character) return <div className={styles.error}>Personaje no encontrado</div>;
+  if (isError || !character) return <div className={styles.error}>Personaje no encontrado</div>;
 
   const favorite = isFavorite(character.id);
 
@@ -55,7 +51,7 @@ const CharacterDetail = () => {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.4 }}
     >
-      <button onClick={() => navigate(-1)} className={styles.backBtn}>
+      <button onClick={handleBack} className={styles.backBtn}>
         ← Volver al listado
       </button>
 
@@ -114,7 +110,11 @@ const CharacterDetail = () => {
         </div>
       </div>
 
-      <ResidentsList locationUrl={character.location.url} currentCharacterId={character.id} />
+      <ResidentsList 
+        locationUrl={character.location.url} 
+        currentCharacterId={character.id} 
+        parentSearch={location.state?.search}
+      />
     </Motion.div>
   );
 };

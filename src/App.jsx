@@ -1,12 +1,12 @@
 import { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Layout from './components/Layout';
-import { FavoritesProvider } from './context/FavoritesContext';
-import ErrorBoundary from './components/ErrorBoundary';
+import Layout from '@/components/Layout';
+import { FavoritesProvider } from '@/context/FavoritesContext';
+import ErrorBoundary from '@/components/ErrorBoundary';
 
-const Home = lazy(() => import('./pages/Home'));
-const CharacterDetail = lazy(() => import('./pages/CharacterDetail'));
-const Favorites = lazy(() => import('./pages/Favorites'));
+const Home = lazy(() => import('@/pages/Home'));
+const CharacterDetail = lazy(() => import('@/pages/CharacterDetail'));
+const Favorites = lazy(() => import('@/pages/Favorites'));
 
 const loaderStyles = {
   padding: '2rem',

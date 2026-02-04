@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { useFavorites } from '../context/FavoritesContext';
-import CharacterCard from '../components/CharacterCard';
+import { useFavorites } from '@/context/FavoritesContext';
+import CharacterCard from '@/components/CharacterCard';
 import styles from './Favorites.module.css';
 
 const Favorites = () => {
