@@ -30,3 +30,14 @@
   border-color: #00b5cc;
   box-shadow: 0 0 0 3px rgba(0, 181, 204, 0.1);
 }
+
+.label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #718096;
+  margin-bottom: 0.5rem;
+  margin-left: 2px;
+}
